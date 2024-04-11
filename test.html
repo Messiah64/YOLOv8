@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Detection Counts</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var socket = io.connect('http://' + document.domain + ':' + location.port);
+            socket.on('connect', function() {
+                console.log('Websocket connected!');
+            });
+            socket.on('update_counts', function(data) {
+                console.log(data);
+                // Update your webpage with new data here
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Detection Counts</h1>
+    <!-- Elements to display counts -->
+</body>
+</html>
