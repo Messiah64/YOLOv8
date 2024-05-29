@@ -11,7 +11,7 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="YOLOv8 Live Detection")
     parser.add_argument(
         "--model-path",
-        default="best_5.pt",  # Path to your YOLO model
+        default="best.pt",  # Path to your YOLO model
         type=str,
         help="Path to the YOLO model file"
     )
@@ -28,10 +28,10 @@ def main():
     # Load the YOLO model
     model = YOLO(model_path)
 
-    confidence_threshold = 0.4  # You can adjust this value as needed
+    confidence_threshold = 0.1  # You can adjust this value as needed
 
     # Capture video from webcam
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     start_time = time.time()
 

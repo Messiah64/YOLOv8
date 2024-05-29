@@ -44,7 +44,7 @@ def main():
     confidence_threshold = 0.4  # You can adjust this value as needed
 
     # Capture video from webcam
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
 
     start_time = time.time()
 

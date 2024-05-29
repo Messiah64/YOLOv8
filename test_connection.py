@@ -1,37 +1,22 @@
 import socket
-import ujson
 
 # Create a socket object
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-# Host and port for the server
-HOST = '0.0.0.0'  # Listen on all available interfaces
+# Server address and port
+HOST = '127.0.0.1'  # Server IP address (localhost in this case)
 PORT = 12345
 
-# Bind the socket to the host and port
-server_socket.bind((HOST, PORT))
+# Connect to the server
+client_socket.connect((HOST, PORT))
+print('Connected to server')
 
-# Listen for incoming connections
-server_socket.listen(1)
-print('Server listening on', PORT)
-
+# Wait for data to be received
 while True:
-    # Accept incoming connection
-    client_socket, client_address = server_socket.accept()
-    print('Connected by', client_address)
+    data = client_socket.recv(1024)
+    if not data:
+        break
+    print('Received data:', data.decode())
 
-    # Example array data
-    data = [1, 2, 3, 4, 5,6,7]
-
-    # Convert array to JSON
-    json_data = ujson.dumps(data)
-
-    try:
-        # Send JSON data to the client
-        client_socket.sendall(json_data.encode())
-        print('Data sent successfully')
-    except Exception as e:
-        print('Error sending data:', e)
-
-    # Close the connection
-    client_socket.close()
+# Close the socket
+client_socket.close()
