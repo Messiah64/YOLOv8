@@ -117,8 +117,9 @@ def main():
 
         # Send the array to the client
         try:
-            data = bytes(str(object_counts), 'utf-8')
-            client_socket.sendall(data)
+            data = ','.join(map(str, object_counts)) + '\n'
+            client_socket.sendall(data.encode('utf-8'))
+            print(f"Sent data: {data.strip()}")
             time.sleep(1)  # Add 1-second delay after sending data
         except Exception as e:
             print('Error sending data:', e)
@@ -135,5 +136,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-    # gg
